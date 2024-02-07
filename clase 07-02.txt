@@ -149,3 +149,65 @@ insert into selecciona (id_cli, id_fab, id_prod) values (5,3,11);
 insert into selecciona (id_cli, id_fab, id_prod) values (20,1,1);
 insert into selecciona (id_cli, id_fab, id_prod) values (20,2,11);
 
+# ejercicios de práctica.
+
+# mostrar dni y nombre de todos los empleados q tienen como jefe a Luisa Carranza. 
+select dni, nombre from empleado where jefe like '%Carranza%';
+
+# cuantos empleados tiene cada jefe.
+select jefe, count(*) as num_empleados from empleado group by jefe; 
+# como un jefe es jefe de si mismo, lo tengo que restar:
+select jefe, count(*)-1 as num_empleados from empleado group by jefe;
+# de esta forma me salen jefes con 0 empleados, no es válido, para solucionarlo:
+select jefe, count(*)-1 as num_empleados from empleado group by jefe having ((count(*)-1) > 0);
+
+# lista de empleados(el nombre de cada uno) que asesoran a cada cliente (nombre del cliente)
+select cliente.nombre as cliente, empleado.nombre as empleado from cliente, empleado, asesora where asesora.id_cliente=cliente.id_cliente AND asesora.id_empleado= empleado.dni;
+# el número de empleados que asesoran a cada cliente.
+select cliente.nombre as cliente, count(*) as num_empl_asesora from cliente, asesora, empleado where cliente.id_cliente= asesora.id_cliente and empleado.dni= asesora.id_empleado group by asesora.id_cliente;
+
+# Listar el nombre de los empleados de la oficina 1 que tengan más de 30 años
+select nombre from empleado where id_oficina=1 and edad>30;
+
+# Listar las oficnas cuyas ventas están por debajo del 80% de su objetivo
+select id_oficina from oficina where (ventas < (objetivo*80/100));
+
+
+# Listar los productos, indicando para cada uno sus identificadores, precio, precio con iva
+select id_prod as producto, id_fab as fabrica, precio, (precio*121/100) as precio_con_iva from producto;
+
+# Listar los últimos 3 pedidos
+select num_pedido, fecha_realizacion from pedido order by fecha_realizacion desc limit 3;
+
+#Listar los pedidos de aquellos clientes con un límite de crédito inferior o igual a 3000€
+select num_pedido from pedido, cliente where pedido.id_cliente=cliente.id_cliente and lim_credito <=3000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
