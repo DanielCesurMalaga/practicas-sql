@@ -1,0 +1,12 @@
+# de cada producto los pedidos q se han hecho.
+select p.id_fab as fabrica, p.id_prod as producto, i.num_pedido as pedido from producto p, incluye i where (p.id_fab=i.id_fab and p.id_prod = i.id_prod);
+
+# seleccionar los empleados que asesoran a cada cliente
+select empleado.nombre, cliente.id_cliente from empleado, asesora where empleado.dni=asesora.id_empleado;
+
+# listado de productos que se han pedido y num de veces que se han pedido.
+select p.id_fab, p.id_prod, count(*) from producto p, incluye i where p.id_fab=i.id_fab and  p.id_prod=i.id_prod group by id_fab, id_prod;
+select p.id_fab, p.id_prod, count(*) from producto p inner join incluye i on p.id_fab=i.id_fab and p.id_prod=i.id_prod group by id_fab, id_prod;
+
+# listado de productos y las veces q se han pedido.	
+select p.id_fab, p.id_prod, count(i.num_pedido) from producto p left join incluye i on p.id_fab=i.id_fab and p.id_prod=i.id_prod group by id_fab, id_prod;
