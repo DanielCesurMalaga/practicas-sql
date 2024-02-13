@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-02-2024 a las 09:57:34
+-- Tiempo de generación: 13-02-2024 a las 11:44:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -77,20 +77,39 @@ INSERT INTO `cond_perm` (`conductor`, `tipo_permiso`) VALUES
 --
 
 CREATE TABLE `tipo_permiso` (
-  `tipo` char(2) NOT NULL
+  `tipo` char(2) NOT NULL,
+  `tipo_vehiculo` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tipo_permiso`
 --
 
-INSERT INTO `tipo_permiso` (`tipo`) VALUES
-('A'),
-('A1'),
-('A2'),
-('B'),
-('B1'),
-('B2');
+INSERT INTO `tipo_permiso` (`tipo`, `tipo_vehiculo`) VALUES
+('B', 'Coche'),
+('B1', 'Coche'),
+('B2', 'Coche'),
+('A', 'Moto'),
+('A1', 'Moto'),
+('A2', 'Moto');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_vehiculo`
+--
+
+CREATE TABLE `tipo_vehiculo` (
+  `vehiculo` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_vehiculo`
+--
+
+INSERT INTO `tipo_vehiculo` (`vehiculo`) VALUES
+('Coche'),
+('Moto');
 
 -- --------------------------------------------------------
 
@@ -138,7 +157,14 @@ ALTER TABLE `cond_perm`
 -- Indices de la tabla `tipo_permiso`
 --
 ALTER TABLE `tipo_permiso`
-  ADD PRIMARY KEY (`tipo`);
+  ADD PRIMARY KEY (`tipo`),
+  ADD KEY `fk_tipo_vehiculo` (`tipo_vehiculo`);
+
+--
+-- Indices de la tabla `tipo_vehiculo`
+--
+ALTER TABLE `tipo_vehiculo`
+  ADD PRIMARY KEY (`vehiculo`);
 
 --
 -- Indices de la tabla `vehiculo`
@@ -158,6 +184,12 @@ ALTER TABLE `vehiculo`
 ALTER TABLE `cond_perm`
   ADD CONSTRAINT `fk_conductor` FOREIGN KEY (`conductor`) REFERENCES `conductor` (`dni`),
   ADD CONSTRAINT `fk_tipo_permiso` FOREIGN KEY (`tipo_permiso`) REFERENCES `tipo_permiso` (`tipo`);
+
+--
+-- Filtros para la tabla `tipo_permiso`
+--
+ALTER TABLE `tipo_permiso`
+  ADD CONSTRAINT `fk_tipo_vehiculo` FOREIGN KEY (`tipo_vehiculo`) REFERENCES `tipo_vehiculo` (`vehiculo`);
 
 --
 -- Filtros para la tabla `vehiculo`

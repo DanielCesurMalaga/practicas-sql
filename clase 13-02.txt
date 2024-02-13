@@ -1,0 +1,14 @@
+# nombre de conductor y permisos q tiene.
+select nombre, tipo_permiso from conductor, cond_perm where (dni=conductor);
+
+select nombre, tipo_permiso from conductor inner join cond_perm on (dni=conductor);
+
+# mostrar los vehículos de cada conductor 
+SELECT nombre, marca, modelo FROM conductor, vehiculo where (dni=propietario);
+
+# mostrar los conductores y sus vehículos 
+select nombre, marca, modelo from conductor left join vehiculo on (dni=propietario);
+
+# mostrar los tipos de permiso que son de coche
+select tipo from tipo_permiso p, tipo_vehiculo v where (p.tipo_vehiculo=v.vehiculo and v.vehiculo='coche');
+select tipo from tipo_permiso p inner join tipo_vehiculo v on (p.tipo_vehiculo=v.vehiculo and v.vehiculo='coche');
