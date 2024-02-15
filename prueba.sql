@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-02-2024 a las 11:44:23
+-- Tiempo de generación: 15-02-2024 a las 10:06:35
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,8 @@ INSERT INTO `conductor` (`dni`, `nombre`, `permiso`, `edad`, `num_vehic`, `fecha
 (2, 'FRAN', 2, 22, 1, '2020-02-02'),
 (3, 'SANTIAGO', 3, 26, 1, '2020-03-03'),
 (4, 'JOSE RAMON', 4, 39, 1, '2020-04-04'),
-(5, 'JUAN CARLOS', 5, 39, NULL, '2020-04-05');
+(5, 'JUAN CARLOS', 5, 39, NULL, '2020-04-05'),
+(6, 'Janhin', 6, 26, 0, '2019-12-31');
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,8 @@ INSERT INTO `cond_perm` (`conductor`, `tipo_permiso`) VALUES
 (2, 'B'),
 (3, 'A1'),
 (4, 'A2'),
-(5, 'B1');
+(5, 'B1'),
+(6, 'B');
 
 -- --------------------------------------------------------
 
@@ -131,8 +133,9 @@ CREATE TABLE `vehiculo` (
 
 INSERT INTO `vehiculo` (`matricula`, `bastidor`, `marca`, `modelo`, `propietario`) VALUES
 ('1234abc', 'jdj', 'mercedes', 'benz', 1),
-('4567abd', '3', 'seat', 'cordoba', 2),
+('45', 'aaa', 'bmw', 's4', 3),
 ('46djhy', 'hbw', 'seat', 'cupra', 2),
+('64', 'bbb', 'bmw', 's5', 4),
 ('9876ygt', '654asdf', 'bmw', 's1', 5);
 
 --
