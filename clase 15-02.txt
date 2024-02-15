@@ -1,0 +1,6 @@
+select propietario from vehiculo where marca='bmw';
+select nombre from conductor where dni = (select propietario from vehiculo where marca='bmw');
+
+select nombre from conductor where dni = (select propietario from vehiculo where marca='seat');	
+
+select nombre from conductor where edad > any (select edad from conductor where edad>20 and edad<30);
