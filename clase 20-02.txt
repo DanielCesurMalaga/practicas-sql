@@ -1,0 +1,23 @@
+# nombre de empleados de la oficina 1
+select nombre from empleado where id_oficina=1;
+
+# igual q arriba pero también quiero saber aparte del nombre, la cuota y las ventas.
+select nombre, ventas, cuota from empleado where id_oficina=1;
+
+#el nombre y la diferencia entre la cuota y la venta de los empleados de la oficina 1.
+select nombre, (cuota-ventas) from empleado where id_oficina=1;
+
+# el nombre de todos los empleados que no hayan llegado a su cuota.
+select nombre from empleado where cuota > ventas;
+
+# el total de ventas de la oficina 2.
+select sum(ventas) from empleado where id_oficina=2;
+
+# la media de ventas de la oficina 3.
+select avg(ventas) from empleado where id_oficina=3;
+
+# el nombre de los empleados de la oficina 3 que no llegan a la media de ventas.
+select nombre from empleado where ventas < (select avg(ventas) from empleado) and id_oficina=3;
+
+# el id de las oficinas cuyas ventas totales superen las cuotas totales. ( de la tabla empleado).
+select id_oficina from empleado group by id_oficina having (sum(ventas)>sum(cuota));
