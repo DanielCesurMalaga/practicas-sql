@@ -16,5 +16,19 @@ select nombre from cliente c, asesora a
     	id_empleado in (1,6);
 
 # seleccionar los pedidos q incluyan productos de la fabrica 1 cuyo precio se encuentre entre 10 y 50 incluidos.
-select num_pedido from incluye WHERE id_prod in (select id_prod from producto where id_fab=1 and (precio>=10 and precio<=50));
+select num_pedido from incluye 
+	WHERE 
+		id_prod in (select id_prod from producto where id_fab=1 and (precio>=10 and precio<=50));
 
+# seleccionar el empleado que más ha vendido.
+select nombre from empleado where ventas in (select max(ventas) from empleado);
+
+# seleccionar el empleado mayor de todos los menores de 30 años.
+select nombre,edad from empleado where edad >= all (select edad from empleado where edad<30) and edad<30;
+
+# nombre de empleados menores de 30 mayores q el más joven.
+select nombre,edad from empleado where edad > any (select edad from empleado where edad<30) and edad<30;
+
+# sacar de mejor a peor las oficinas en funcion de las ventas de sus empleados.
+select sum(ventas) from empleado where id_oficina=1;
+select id_oficina, sum(ventas) as total_ventas from empleado group by id_oficina order by sum(ventas) desc;
