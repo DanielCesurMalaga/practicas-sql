@@ -1,0 +1,20 @@
+#seleccionar los nombres de los clientes asesorados por empleados de edad mayor de 50 años
+select nombre from cliente c, asesora a 
+	where 
+		c.id_cliente= a.id_cliente 
+		and 
+		id_empleado in (select dni from empleado where (edad>50));
+
+#los clientes a los q asesoran los empleados (13,14,19,20) 
+select id_cliente from asesora where id_empleado in (13,14,19,20);
+
+# sacar los nombre de los clientes q son asesorados por empleados: 1,6
+select nombre from cliente c, asesora a 
+	where 
+    	c.id_cliente = a.id_cliente
+        AND
+    	id_empleado in (1,6);
+
+# seleccionar los pedidos q incluyan productos de la fabrica 1 cuyo precio se encuentre entre 10 y 50 incluidos.
+select num_pedido from incluye WHERE id_prod in (select id_prod from producto where id_fab=1 and (precio>=10 and precio<=50));
+
